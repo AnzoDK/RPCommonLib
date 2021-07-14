@@ -6,9 +6,9 @@ pkgver=0.0.1
 pkgrel=1
 arch=('any')
 pkgdesc="A compilation of small and common functions to make the dev life easier"
-url="https://github.com/AnzoDK/RPCommon"
+url="https://github.com/AnzoDK/RPCommonLib"
 makedepends=('git')
-source=("git+https://github.com/AnzoDK/RPCommon.git#tag=v${pkgver}")
+source=("git+https://github.com/AnzoDK/RPCommonLib.git#tag=v${pkgver}")
 license=('BSD2')
 md5sums=('SKIP')
 package()
