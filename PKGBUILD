@@ -3,7 +3,7 @@ pkgname="rpcommon"
 provides=('rpcommon')
 conflicts=('rpcommon-dev')
 pkgver=0.0.2
-pkgrel=1
+pkgrel=2
 arch=('any')
 pkgdesc="A compilation of small and common functions to make the dev life easier"
 url="https://github.com/AnzoDK/RPCommonLib"
@@ -15,6 +15,6 @@ package()
 {
    cd RPCommonLib
    mkdir -p "$pkgdir/usr/include/RPCommon"
-   install -D ./RPCommon/ "$pkgdir/usr/include/"
+   install -D ./RPCommon/* "$pkgdir/usr/include/RPCommon/"
    #install -D ./LICENSE "${pkgdir}"/usr/share/licenses/$pkgname/LICENSE   
 }
