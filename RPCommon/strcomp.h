@@ -1,5 +1,6 @@
 //C String comapre
 //expecting nulltermination unless "no-null" is specified, in that case the length of the string will need to be provided
+#pragma once
 bool Cstrcmp(const char* s1, const char* s2)
 {
     uint64_t c = 0;
