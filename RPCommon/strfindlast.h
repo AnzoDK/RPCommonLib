@@ -21,7 +21,7 @@ size_t StringFindLast(std::string search, std::string s)
     //Keep the length so we don't have to get it from the string every loop
     size_t len = s.length();
     size_t searchLen = search.length();
-    for(size_t i = 0; i < len; i++)
+    for(size_t i = 0; i < len-searchLen; i++)
     {
         if(s.substr(len-i-1-searchLen,searchLen) == search)
         {
