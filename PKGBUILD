@@ -2,8 +2,8 @@
 pkgname="rpcommon"
 provides=('rpcommon')
 conflicts=('rpcommon-dev')
-pkgver=0.0.5
-pkgrel=3
+pkgver=0.0.6
+pkgrel=1
 arch=('any')
 pkgdesc="A compilation of small and common functions to make the dev life easier"
 url="https://github.com/AnzoDK/RPCommonLib"
