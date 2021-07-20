@@ -2,3 +2,4 @@ RPCommonLib/*
 src/*
 pkg/*
 *.zst
+*.out

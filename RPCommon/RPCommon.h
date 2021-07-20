@@ -2,3 +2,5 @@
 #include "strreverse.h"
 #include "strfindlast.h"
 #include "strcomp.h"
+#include "keymap.h"
+#include "byteprint.h"
