@@ -2,7 +2,7 @@
 pkgname="rpcommon"
 provides=('rpcommon')
 conflicts=('rpcommon-dev')
-pkgver=0.0.9
+pkgver=0.0.10
 pkgrel=1
 arch=('any')
 pkgdesc="A compilation of small and common functions to make the dev life easier"
@@ -16,7 +16,7 @@ package()
    cd RPCommonLib
    make
    ./test.out
-   if [ #? -ne 0 ]
+   if [ $? -ne 0 ]
    then
    	echo "Tests Failed!! - Dying!"
    	exit 1
