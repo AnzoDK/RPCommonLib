@@ -9,6 +9,9 @@ Takes a string and reverses it, without deleting the input string, and returns t
 ### size_t StringFindLast(char, std::string)
 Finds the last instance of a given char in a given string, and returns the position
 
+### size_t StringFindLast(std::string, std::string)
+Finds the last instance of a given string in a given string, and returns the position
+
 ### bool Cstrcmp(const char*, const char*)
 Compares two null-terminated C-strings without including \<stdio> or \<string>
 
