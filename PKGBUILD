@@ -1,8 +1,8 @@
 # Maintainer: AnzoDK <anton@rosenoern-productions.dk>
-pkgname="rpcommon"
+pkgname="rpcommon-dev"
 provides=('rpcommon')
-conflicts=('rpcommon-dev')
-pkgver=0.0.10
+conflicts=('rpcommon')
+pkgver=0.0.10-dev
 pkgrel=1
 arch=('any')
 pkgdesc="A compilation of small and common functions to make the dev life easier"
