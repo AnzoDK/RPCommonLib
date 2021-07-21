@@ -4,3 +4,4 @@
 #include "strcomp.h"
 #include "keymap.h"
 #include "byteprint.h"
+#include "strlen.h"

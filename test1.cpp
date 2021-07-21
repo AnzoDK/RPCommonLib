@@ -85,7 +85,7 @@ bool PerformTestCstrcmp()
     
     std::cout << TERMINAL_COLOR_GREEN << "Passed!" << TERMINAL_COLOR_RESET << std::endl;
     
-    std::cout << "Comparing " << TERMINAL_COLOR_BLUE << std::string(testChar5) << TERMINAL_COLOR_RESET << " to " TERMINAL_COLOR_BLUE << std::string(testChar6) << TERMINAL_COLOR_RESET << std::endl;
+    std::cout << "Comparing " << TERMINAL_COLOR_BLUE << std::string(GetBytes<const char>(testChar5,9)) << TERMINAL_COLOR_RESET << " to " TERMINAL_COLOR_BLUE << std::string(GetBytes<const char>(testChar6,9)) << TERMINAL_COLOR_RESET << std::endl;
     
     if(!Cstrcmp(testChar5,9,testChar6,9))
     {
@@ -95,7 +95,7 @@ bool PerformTestCstrcmp()
     
     std::cout << TERMINAL_COLOR_GREEN << "Passed!" << TERMINAL_COLOR_RESET << std::endl;
     
-    std::cout << "Comparing " << TERMINAL_COLOR_BLUE << std::string(testChar6) << TERMINAL_COLOR_RESET << " to " TERMINAL_COLOR_BLUE << std::string(testChar7) << TERMINAL_COLOR_RESET << std::endl;
+    std::cout << "Comparing " << TERMINAL_COLOR_BLUE << std::string(GetBytes<const char>(testChar6,9)) << TERMINAL_COLOR_RESET << " to " TERMINAL_COLOR_BLUE << std::string(GetBytes<const char>(testChar7,10)) << TERMINAL_COLOR_RESET << std::endl;
     
     if(Cstrcmp(testChar6,9,testChar7,9))
     {
@@ -131,9 +131,44 @@ bool PerformTestBytePrint()
     
 }
 
+bool PerformTestCstrlen()
+{
+    const char* lengthTest1 = "0123456789";
+    std::cout << "Checking length of: " << TERMINAL_COLOR_BLUE << std::string(lengthTest1) << TERMINAL_COLOR_RESET << TERMINAL_COLOR_RESET << std::endl;
+    if (Cstrlen(lengthTest1) != 10)
+    {
+        std::cout << "[\"" << TERMINAL_COLOR_BLUE << std::string(lengthTest1) << TERMINAL_COLOR_RESET << "\"]" << TERMINAL_COLOR_RED << " was determined to be: " << std::to_string(Cstrlen(lengthTest1)) << " Should have been [" << TERMINAL_COLOR_BLUE << std::to_string(10) << TERMINAL_COLOR_RED << "] FATAL" << TERMINAL_COLOR_RESET << std::endl;
+        return false;
+    }
+    std::cout << TERMINAL_COLOR_GREEN << "Passed!" << TERMINAL_COLOR_RESET << std::endl;
+    return true;
+}
+
 bool PerformTestStringFindLast()
 {
-    
+   std::string findLastTest1 = "Hello! World!";
+   std::string findLastTest2 = "Hi There Hello Hi Hello";
+   
+   std::cout << "Finding last of '!' in: " << TERMINAL_COLOR_BLUE << std::string(findLastTest1) << TERMINAL_COLOR_RESET << TERMINAL_COLOR_RESET << std::endl;
+   if(StringFindLast('!',findLastTest1) != 12)
+   {
+        std::cout << "Last ['" << TERMINAL_COLOR_BLUE << "!" << TERMINAL_COLOR_RESET << "']" << TERMINAL_COLOR_RED << " was determined to be located at: " << std::to_string(StringFindLast('!',findLastTest1)) << " Should have been [" << TERMINAL_COLOR_BLUE << std::to_string(12) << TERMINAL_COLOR_RED << "] FATAL" << TERMINAL_COLOR_RESET << std::endl;
+        return false;
+   }
+   
+   std::cout << TERMINAL_COLOR_GREEN << "Passed!" << TERMINAL_COLOR_RESET << std::endl;
+   
+   std::cout << "Finding last of \"Hi\" in: " << TERMINAL_COLOR_BLUE << std::string(findLastTest2) << TERMINAL_COLOR_RESET << TERMINAL_COLOR_RESET << std::endl;
+   if(StringFindLast("Hi",findLastTest2) != 15)
+   {
+        std::cout << "Last [\"" << TERMINAL_COLOR_BLUE << "Hi" << TERMINAL_COLOR_RESET << "\"]" << TERMINAL_COLOR_RED << " was determined to be located at: " << std::to_string(StringFindLast("Hi",findLastTest2)) << " Should have been [" << TERMINAL_COLOR_BLUE << std::to_string(15) << TERMINAL_COLOR_RED << "] FATAL" << TERMINAL_COLOR_RESET << std::endl;
+        return false;
+   }
+   
+   std::cout << TERMINAL_COLOR_GREEN << "Passed!" << TERMINAL_COLOR_RESET << std::endl;
+   
+   return true;
+   
 }
 
 int main()
@@ -150,13 +185,18 @@ int main()
         std::cout << TERMINAL_COLOR_RED << "byteprint failed!" << TERMINAL_COLOR_RESET << std::endl;
         exit(0b00000010);
     }
-        std::cout << TERMINAL_COLOR_YELLOW << "Running tests on StringFindLast" << TERMINAL_COLOR_RESET << std::endl;
-        //Not added yet
-    /*if(!PerformTestStringFindLast())
+    std::cout << TERMINAL_COLOR_YELLOW << "Running tests on StringFindLast" << TERMINAL_COLOR_RESET << std::endl;
+    if(!PerformTestStringFindLast())
     {
         std::cout << TERMINAL_COLOR_RED << "strfindlast failed!" << TERMINAL_COLOR_RESET << std::endl;
         exit(0b00000100);
-    }*/
+    }
+    std::cout << TERMINAL_COLOR_YELLOW << "Running tests on Cstrlen" << TERMINAL_COLOR_RESET << std::endl;
+    if(!PerformTestCstrlen())
+    {
+        std::cout << TERMINAL_COLOR_RED << "Cstrlen failed!" << TERMINAL_COLOR_RESET << std::endl;
+        exit(0b00001000);
+    }
     
     std::cout << TERMINAL_COLOR_GREEN << "Test Complete - No errors!" << TERMINAL_COLOR_RESET << std::endl;
     return 0;
