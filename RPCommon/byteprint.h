@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-
+/*Should not be used by functions outside the lib, but nothing bad happens if it is used*/
 char __HexTable(unsigned char c)
 {
     switch(c)
@@ -54,6 +54,7 @@ void PrintBytes()
 }
 
 template <typename T>
+//Want to get the bytes of a single item? Np - just hand this function a pointer to the object and set arrLen to 1 :)
 std::string GetBytes(T* tArr, unsigned int arrLen)
 {
     std::string res = "";
