@@ -5,3 +5,4 @@
 //#include "keymap.h"
 #include "byteprint.h"
 #include "strlen.h"
+#include "terminalcolor.h"
