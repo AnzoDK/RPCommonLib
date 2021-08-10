@@ -3,6 +3,8 @@ A compilation of small and common functions to make the dev life easier
 
 List of Functions included:
 
+# THIS LIST NEEDS UPDATING!!!!!!!!!!!!!!!
+
 ### std::string ReverseString(std::string)
 Takes a string and reverses it, without deleting the input string, and returns the reversed string
 
