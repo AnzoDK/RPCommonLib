@@ -34,7 +34,7 @@ bool Cstrcmp(const char* s1, uint64_t s1l, const char* s2, uint64_t s2l, bool as
     {
         while(c < s1l) //s1l needs to be equal to s2l anyway so it matters not that only compare against s1l
         {
-            if(static_cast<unsigned char>(s1[c]) != static_cast<unsigned char>(s2[c])) //This allows comarision against null bytes
+            if(static_cast<unsigned char>(s1[c]) != static_cast<unsigned char>(s2[c])) //This allows comparision against null bytes
             {
                 return false;
             }
