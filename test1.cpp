@@ -154,6 +154,44 @@ bool PerformTestStringFindLast()
    
 }
 
+bool PerformTestVecPrint()
+{
+    std::vector<int> testErrVec = {1,2,3,4,5,6,7};
+    std::vector<std::vector<int>> testErrVec2 = {testErrVec, testErrVec};
+    std::vector<float> testErrVec3 = {1.1,1.2,1.3,1.4,1.5,1.6,1.7};
+    std::vector<double> testErrVec4 = {1.11,1.112,1.113,1.114,1.115,1.115,1.116,1.117};
+    std::vector<char> testErrVec5 = {'A','B','C','D','E','F','G','H','I','J'};
+    
+    
+    std::cout << "Testing Normal and Strange VecPrint Calls..." << std::endl;
+    
+    std::cout << "Testing 'int'" << std::endl;
+    
+    PrintVector(testErrVec);
+    
+    std::cout << "Testing 'float'" << std::endl;
+    
+    PrintVector(testErrVec3);
+    
+    std::cout << "Testing 'double'" << std::endl;
+    
+    PrintVector(testErrVec4);
+    
+    std::cout << "Testing 'char'" << std::endl;
+    
+    PrintVector(testErrVec5);
+    
+    std::cout << TERMINAL_COLOR_GREEN << "Standard Vec Print Complete!" << TERMINAL_COLOR_RESET << std::endl;
+    
+    PrintVector(testErrVec2);
+
+    std::cout << TERMINAL_COLOR_GREEN << "Strange Vec Print Complete!" << TERMINAL_COLOR_RESET << std::endl;
+    
+    std::cout << TERMINAL_COLOR_GREEN << "Passed!" << TERMINAL_COLOR_RESET << std::endl;
+    return true;
+}
+
+
 int main()
 {
     std::cout << TERMINAL_COLOR_YELLOW << "Running tests on Cstrcmp" << TERMINAL_COLOR_RESET << std::endl;
@@ -179,6 +217,12 @@ int main()
     {
         std::cout << TERMINAL_COLOR_RED << "Cstrlen failed!" << TERMINAL_COLOR_RESET << std::endl;
         exit(0b00001000);
+    }
+    std::cout << TERMINAL_COLOR_YELLOW << "Running tests on arrayprint" << TERMINAL_COLOR_RESET << std::endl;
+    if(!PerformTestVecPrint())
+    {
+        std::cout << TERMINAL_COLOR_RED << "arrayprint failed!" << TERMINAL_COLOR_RESET << std::endl;
+        exit(0b00010000);
     }
     
     std::cout << TERMINAL_COLOR_GREEN << "Test Complete - No errors!" << TERMINAL_COLOR_RESET << std::endl;

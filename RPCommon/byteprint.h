@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-
+#include <vector>
 char __HexTable(unsigned char c)
 {
     switch(c)
@@ -53,6 +53,7 @@ void PrintBytes()
     
 }
 
+
 template <typename T>
 std::string GetBytes(T* tArr, unsigned int arrLen)
 {
@@ -68,6 +69,46 @@ std::string GetBytes(T* tArr, unsigned int arrLen)
             res += GetHexFromTable((unsigned char)(*(tArr+u+(i*t_size))));
         }
         if(i != full_arr_size-t_size)
+        {
+            res += " ";
+        }
+        
+    }
+    return res;
+}
+//Vectors made me do this..... Blame them, not me XD
+//Get Object at memaddress and print it's hex values
+template <typename T>
+std::string GetBytes(size_t address, unsigned int arrLen, bool showObjs=false)
+{
+    std::string res = "";
+    unsigned int t_size = sizeof(T);
+    unsigned int full_arr_size = t_size*arrLen;
+    for(unsigned int i = 0; i < full_arr_size; i+=t_size)
+    {
+        if(showObjs)
+        {
+            res+= "Obj {";
+        }
+        for(unsigned int u = 0; u < t_size; u++)
+        {
+            //res += (unsigned char)(*(tArr+u+(i*t_size)));
+            res += "0x";
+            res += GetHexFromTable(*(reinterpret_cast<uint8_t*>(address)+u+(i*t_size))); //Fuck this line >:(
+            if(u != t_size-1)
+            {
+                res += " ";
+            }
+        }
+        if(showObjs)
+        {
+            res += "}";
+        }
+        if(i != full_arr_size-t_size && showObjs)
+        {
+            res += "\n";
+        }
+        if(i != full_arr_size-t_size && !showObjs)
         {
             res += " ";
         }
