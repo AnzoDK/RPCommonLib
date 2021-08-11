@@ -9,3 +9,4 @@
 #include "arrayprint.h"
 //This header is not useful at the current state and has been disabled
 //#include "rpcommonerr.h"
+#include "eat.h"

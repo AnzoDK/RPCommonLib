@@ -191,6 +191,37 @@ bool PerformTestVecPrint()
     return true;
 }
 
+bool PerformTestEat()
+{
+    std::string test1 = "ABCD";
+    const char* test2 = "ABCD";
+    std::cout << "Testing Eating of std::string" << std::endl;
+    
+    Eat(test1);
+    
+    if(test1 != "BCD")
+    {
+        std::cout << TERMINAL_COLOR_RED << test1 << " is not equal to " << "BCD" << TERMINAL_COLOR_RESET << std::endl;
+        return false;
+    }
+    
+    std::cout << TERMINAL_COLOR_GREEN << "Passed!" << TERMINAL_COLOR_RESET << std::endl;
+    
+    Eat(test2);
+    
+    if(Cstrcmp(test2,"BCD"))
+    {
+        std::cout << TERMINAL_COLOR_RED << test2 << " is not equal to " << "BCD" << TERMINAL_COLOR_RESET << std::endl;
+        return false;
+    }
+    
+    std::cout << TERMINAL_COLOR_GREEN << "Passed!" << TERMINAL_COLOR_RESET << std::endl;
+    
+    return true;
+    
+    
+}
+
 
 int main()
 {
@@ -223,6 +254,12 @@ int main()
     {
         std::cout << TERMINAL_COLOR_RED << "arrayprint failed!" << TERMINAL_COLOR_RESET << std::endl;
         exit(0b00010000);
+    }
+    std::cout << TERMINAL_COLOR_YELLOW << "Running tests on eat" << TERMINAL_COLOR_RESET << std::endl;
+    if(!PerformTestEat())
+    {
+        std::cout << TERMINAL_COLOR_RED << "eat failed!" << TERMINAL_COLOR_RESET << std::endl;
+        exit(0b00100000);
     }
     
     std::cout << TERMINAL_COLOR_GREEN << "Test Complete - No errors!" << TERMINAL_COLOR_RESET << std::endl;
