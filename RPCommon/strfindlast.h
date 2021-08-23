@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-size_t StringFindLast(char c, std::string s)
+inline size_t StringFindLast(char c, std::string s)
 {
     size_t tmp = 0;
     //Keep the length so we don't have to get it from the string every loop
@@ -15,7 +15,7 @@ size_t StringFindLast(char c, std::string s)
     }
     return std::string::npos;
 }
-size_t StringFindLast(std::string search, std::string s)
+inline size_t StringFindLast(std::string search, std::string s)
 {
     size_t tmp = 0;
     //Keep the length so we don't have to get it from the string every loop

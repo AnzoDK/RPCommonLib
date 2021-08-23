@@ -5,7 +5,7 @@
 #include "arrayprint.h"
 
 template<typename T>
-T* VecToArr(std::vector<T> vec, size_t& returnSize)
+inline T* VecToArr(std::vector<T> vec, size_t& returnSize)
 {
     T* arr = new T[vec.size()];
     for(size_t i = 0; i < vec.size(); i++)
@@ -17,7 +17,7 @@ T* VecToArr(std::vector<T> vec, size_t& returnSize)
 }
 
 template<typename T> //T has to be able to be casted to a string via std::to_string
-typename std::enable_if<std::is_convertible<T,int>::value && !std::is_same<T,char>::value,void>::type  //*Sigh* Chars will be casted to ints here... Fml - This fix for chars is so fucking stupid
+inline typename std::enable_if<std::is_convertible<T,int>::value && !std::is_same<T,char>::value,void>::type  //*Sigh* Chars will be casted to ints here... Fml - This fix for chars is so fucking stupid
 PrintVector(std::vector<T> vec)
 {
 
@@ -27,7 +27,7 @@ PrintVector(std::vector<T> vec)
     }
 }
 template<typename T>
-typename std::enable_if<std::is_same<T,char>::value,void>::type
+inline typename std::enable_if<std::is_same<T,char>::value,void>::type
 PrintVector(std::vector<T> vec)
 {
     for(size_t i = 0; i < vec.size(); i++)
@@ -80,7 +80,7 @@ PrintVector(std::vector<T> vec)
 }*/
 
 template<typename T>
-typename std::enable_if<!std::is_convertible<T,int>::value,void>::type
+inline typename std::enable_if<!std::is_convertible<T,int>::value,void>::type
 PrintVector(std::vector<T> vec)
 {
     std::cout << TERMINAL_COLOR_YELLOW << "Type unknown - Returning Hex values for object of size: " << std::to_string(sizeof(T)) << TERMINAL_COLOR_RESET << std::endl;
@@ -91,7 +91,7 @@ PrintVector(std::vector<T> vec)
 }
 
 template <typename T>//T has to be able to be casted to a string via std::to_string
-void PrintArray(T* arr, size_t arrSize)
+inline void PrintArray(T* arr, size_t arrSize)
 {
     size_t TSize = sizeof(T);
     for(size_t i = 0; i < arrSize; i++)

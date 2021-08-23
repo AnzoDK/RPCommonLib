@@ -2,7 +2,7 @@
 //expecting nulltermination unless "no-null" is specified, in that case the length of the string will need to be provided
 #pragma once
 #include <iostream>
-bool Cstrcmp(const char* s1, const char* s2)
+inline bool Cstrcmp(const char* s1, const char* s2)
 {
     uint64_t c = 0;
     while(static_cast<unsigned char>(s1[c]) != 0x0 && static_cast<unsigned char>(s2[c]) != 0x0)
@@ -21,7 +21,7 @@ bool Cstrcmp(const char* s1, const char* s2)
 }
 
 //Does not expect null-termination - This also allows comparison against strings with nulls in it
-bool Cstrcmp(const char* s1, uint64_t s1l, const char* s2, uint64_t s2l, bool asBytes=false)
+inline bool Cstrcmp(const char* s1, uint64_t s1l, const char* s2, uint64_t s2l, bool asBytes=false)
 {
     //Basically just a sanity check
     if (s1l != s2l)

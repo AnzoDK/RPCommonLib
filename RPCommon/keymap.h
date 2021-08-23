@@ -4,7 +4,7 @@
 template <typename T>
 struct Key
 {
-    Key(){keyName = ""; keyValue = nullptr;};
+    Key(){keyName = "";};
     //Don't use this - This is meant to be used to create empty keys for errors
     Key(std::string name){ keyName = name, keyValue = nullptr;};
     

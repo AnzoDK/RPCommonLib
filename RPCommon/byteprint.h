@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
-char __HexTable(unsigned char c)
+inline char __HexTable(unsigned char c)
 {
     switch(c)
     {
@@ -36,7 +36,7 @@ char __HexTable(unsigned char c)
     }
 }
 
-std::string GetHexFromTable(unsigned char b)
+inline std::string GetHexFromTable(unsigned char b)
 {
     std::string res = "";
     unsigned char tmp = b;
@@ -48,14 +48,14 @@ std::string GetHexFromTable(unsigned char b)
     
 }
 
-void PrintBytes()
+inline void PrintBytes()
 {
     
 }
 
 
 template <typename T>
-std::string GetBytes(T* tArr, unsigned int arrLen)
+inline std::string GetBytes(T* tArr, unsigned int arrLen)
 {
     std::string res = "";
     unsigned int t_size = sizeof(T);
@@ -79,7 +79,7 @@ std::string GetBytes(T* tArr, unsigned int arrLen)
 //Vectors made me do this..... Blame them, not me XD
 //Get Object at memaddress and print it's hex values
 template <typename T>
-std::string GetBytes(size_t address, unsigned int arrLen, bool showObjs=false)
+inline std::string GetBytes(size_t address, unsigned int arrLen, bool showObjs=false)
 {
     std::string res = "";
     unsigned int t_size = sizeof(T);
