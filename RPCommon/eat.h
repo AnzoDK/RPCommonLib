@@ -2,7 +2,7 @@
 #include <iostream>
 #include "strlen.h"
 #include "strreverse.h"
-void Eat(const char* cs)
+inline void Eat(const char* cs)
 {
     std::string s = std::string(cs);
     size_t len = Cstrlen(cs);
@@ -16,7 +16,7 @@ void Eat(const char* cs)
     
 }
 
-void Eat(std::string &s)
+inline void Eat(std::string &s)
 {
     if(s.size() > 0)
     {
