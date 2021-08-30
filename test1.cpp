@@ -221,6 +221,60 @@ bool PerformTestEat()
     
     
 }
+bool PerformTestFstream()
+{
+    unsigned char expected[45] =
+    {
+        0x4e, 0x6f, 0x72, 0x6d,
+        0x61, 0x6c, 0x54, 0x65,
+        0x78, 0x74, 0x52, 0x69,
+        0x67, 0x68, 0x74, 0x20,
+        0x68, 0x65, 0x72, 0x65,
+        0x0a, 0x00, 0x00, 0x00,
+        0x44, 0x33, 0x43, 0x44,
+        0x03, 0x32, 0x23, 0x01,
+        0x02, 0x03, 0x04, 0x05,
+        0x06, 0x07, 0x08, 0x09,
+        0x03, 0x04, 0x05, 0x06,
+        0x00
+    };
+    
+    std::cout << "Testing File Read with correct parameters..." << std::endl;
+    
+    size_t bytesRead = 0;
+    unsigned char* input = ReadUnsignedFile("testRead.txt",bytesRead);
+    if(bytesRead == 45)
+    {
+    if(!Cstrcmp(reinterpret_cast<char*>(input),bytesRead,reinterpret_cast<char*>(expected),45,true))
+    {
+        std::cout << TERMINAL_COLOR_RED << GetBytes(input,bytesRead) << " is supposed to be equal to " << GetBytes(expected,45) << TERMINAL_COLOR_RESET << std::endl;
+        return false;
+    }
+    }
+    else
+    {
+        std::cout << TERMINAL_COLOR_RED << GetBytes(input,bytesRead) << " is supposed 45 bytes long.. " << TERMINAL_COLOR_RESET << std::endl;
+        return false;
+    }
+    bytesRead = 0;
+    
+    std::cout << TERMINAL_COLOR_GREEN << "Passed!" << TERMINAL_COLOR_RESET << std::endl;
+    
+    std::cout << "Testing File Read with wrong paramenters..." << std::endl;
+    delete[] input;
+    bytesRead = 40;
+    input = ReadPartialUnsignedFile("testRead.txt",bytesRead);
+    if(Cstrcmp(reinterpret_cast<char*>(input),bytesRead,reinterpret_cast<char*>(expected),45,true))
+    {
+        std::cout << TERMINAL_COLOR_RED << GetBytes(expected,bytesRead) << " is not supposed to be equal to " << GetBytes(input,45) << TERMINAL_COLOR_RESET << std::endl;
+        return false;
+    }
+    
+    std::cout << TERMINAL_COLOR_GREEN << "Passed!" << TERMINAL_COLOR_RESET << std::endl;
+    
+    return true;
+    
+}
 
 
 int main()
@@ -260,6 +314,12 @@ int main()
     {
         std::cout << TERMINAL_COLOR_RED << "eat failed!" << TERMINAL_COLOR_RESET << std::endl;
         exit(0b00100000);
+    }
+    std::cout << TERMINAL_COLOR_YELLOW << "Running tests on unsignedfstream" << TERMINAL_COLOR_RESET << std::endl;
+    if(!PerformTestFstream())
+    {
+        std::cout << TERMINAL_COLOR_RED << "unsignedfstream failed!" << TERMINAL_COLOR_RESET << std::endl;
+        exit(0b01000000);
     }
     
     std::cout << TERMINAL_COLOR_GREEN << "Test Complete - No errors!" << TERMINAL_COLOR_RESET << std::endl;
