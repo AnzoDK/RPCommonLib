@@ -1,3 +1,4 @@
+#pragma once
 #ifndef NO_COLOR
 #define TERMINAL_COLOR_RESET "\e[0m"
 #define TERMINAL_COLOR_RED "\e[1;31m"
