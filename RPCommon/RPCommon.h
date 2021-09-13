@@ -1,4 +1,7 @@
 #pragma once
+#if defined(win32) || defined(win64)
+#include <string>
+#endif
 #include "strreverse.h"
 #include "strfindlast.h"
 #include "strcomp.h"
