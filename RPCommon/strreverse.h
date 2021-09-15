@@ -1,5 +1,5 @@
-#include <iostream>
 #pragma once
+#include <iostream>
 inline static std::string ReverseString(std::string s)
 {
     std::string tmp = "";

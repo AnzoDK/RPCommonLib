@@ -1,5 +1,5 @@
 #pragma once
-#if defined(win32) || defined(win64)
+#if defined(WIN32) || defined(WIN64)
 #include <string>
 #endif
 #include "strreverse.h"
