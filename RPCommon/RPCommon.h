@@ -10,6 +10,7 @@
 #include "strlen.h"
 #include "terminalcolor.h"
 #include "arrayprint.h"
+#include "arraycpy.h"
 //This header is not useful at the current state and has been disabled
 //#include "rpcommonerr.h"
 #include "eat.h"

@@ -276,6 +276,42 @@ bool PerformTestFstream()
     
 }
 
+bool PerformTestArrayCopy()
+{
+    std::cout << "Testing ArrayCompare..." << std::endl;
+    
+    int _arr[] = {0,1,2,3,4,5};
+    int _arr2[] = {0,1,2,3,4,5};
+    int _arr3[] = {0,1,3,3,4,5};
+    
+    if(!ArrayCompare(_arr,6,_arr2,6))
+    {
+        std::cout << TERMINAL_COLOR_RED << GetBytes(_arr,6) << " is supposed to be equal to " << GetBytes(_arr2,6) << TERMINAL_COLOR_RESET << std::endl;
+        return false;
+    }
+    
+    std::cout << TERMINAL_COLOR_GREEN << "Equal Test Passed!" << TERMINAL_COLOR_RESET << std::endl;
+    
+    if(ArrayCompare(_arr,6,_arr3,6))
+    {
+        std::cout << TERMINAL_COLOR_RED << GetBytes(_arr,6) << " is not supposed to be equal to " << GetBytes(_arr3,6) << TERMINAL_COLOR_RESET << std::endl;
+        return false;
+    }
+    
+     std::cout << TERMINAL_COLOR_GREEN << "Unequal Test Passed!" << TERMINAL_COLOR_RESET << std::endl;
+    
+    int arr[] = {0,0,0,0,2,0,2,0,2,0,2,0,5,6,7,8,5,4,3,1,2,4,5,6,7,4,46,4,5,4,4,3,4,5,6,546,5,65,656,56,56,56,56,56,56,1243,2343,435,346,3,756,7};
+    std::cout << "Testing Copy..." << std::endl;
+    int* newArr = ArrayCopy(arr,52);
+    
+    if(!ArrayCompare(arr,52,newArr,52))
+    {
+        std::cout << TERMINAL_COLOR_RED << GetBytes(arr,52) << " is supposed to be equal to " << GetBytes(newArr,52) << TERMINAL_COLOR_RESET << std::endl;
+        return false;
+    }
+     std::cout << TERMINAL_COLOR_GREEN << "All 'arraycpy' Tests Passed!" << TERMINAL_COLOR_RESET << std::endl;
+    return true;
+}
 
 int main()
 {
@@ -320,6 +356,12 @@ int main()
     {
         std::cout << TERMINAL_COLOR_RED << "unsignedfstream failed!" << TERMINAL_COLOR_RESET << std::endl;
         exit(0b01000000);
+    }
+    std::cout << TERMINAL_COLOR_YELLOW << "Running tests on arraycpy" << TERMINAL_COLOR_RESET << std::endl;
+    if(!PerformTestArrayCopy())
+    {
+        std::cout << TERMINAL_COLOR_RED << "arraycpy failed!" << TERMINAL_COLOR_RESET << std::endl;
+        exit(0b10000000);
     }
     
     std::cout << TERMINAL_COLOR_GREEN << "Test Complete - No errors!" << TERMINAL_COLOR_RESET << std::endl;
