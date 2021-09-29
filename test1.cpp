@@ -307,10 +307,57 @@ bool PerformTestArrayCopy()
     if(!ArrayCompare(arr,52,newArr,52))
     {
         std::cout << TERMINAL_COLOR_RED << GetBytes(arr,52) << " is supposed to be equal to " << GetBytes(newArr,52) << TERMINAL_COLOR_RESET << std::endl;
+        delete[] newArr;
         return false;
     }
+    delete[] newArr;
      std::cout << TERMINAL_COLOR_GREEN << "All 'arraycpy' Tests Passed!" << TERMINAL_COLOR_RESET << std::endl;
     return true;
+}
+
+bool PerformTestInitList()
+{
+    int arr[] = {1,2,3,4,5};
+    size_t size = 0;
+    std::cout << "Testing InitToÁrray..." << std::endl;
+    int* arr2 = InitilizerToArray({1,2,3,4,5},size);
+    if(!ArrayCompare(arr,5,arr2,size))
+    {
+        std::cout << TERMINAL_COLOR_RED << GetBytes(arr,5) << " is supposed to be equal to " << GetBytes(InitilizerToArray({1,2,3,4,5},size),size) << TERMINAL_COLOR_RESET << std::endl;
+        delete[] arr2;
+        return false;
+    }
+    delete[] arr2;
+    std::cout << TERMINAL_COLOR_GREEN << "Equal Test Passed!" << TERMINAL_COLOR_RESET << std::endl;
+    arr2 = InitilizerToArray({1,2,3,4,9},size);
+    if(ArrayCompare(arr,5,arr2,size))
+    {
+        std::cout << TERMINAL_COLOR_RED << GetBytes(arr,5) << " is not supposed to be equal to " << GetBytes(InitilizerToArray({1,2,3,4,6},size),size) << TERMINAL_COLOR_RESET << std::endl;
+        delete[] arr2;
+        return false;
+    }
+    delete[] arr2;
+    std::cout << TERMINAL_COLOR_GREEN << "Unequal Test Passed!" << TERMINAL_COLOR_RESET << std::endl;
+    std::cout << "Testing InitToVector..." << std::endl;
+    
+    std::vector<int> v = std::vector<int>();
+    v = {1,2,3,4,5};
+    
+    if(!VectorCompare(v,InitilizerToVector({1,2,3,4,5})))
+    {
+        std::cout << TERMINAL_COLOR_RED << GetBytes(&v[0],5) << " is supposed to be equal to " << GetBytes(&InitilizerToVector({1,2,3,4,5})[0],5) << TERMINAL_COLOR_RESET << std::endl;
+        return false;
+    }
+    std::cout << TERMINAL_COLOR_GREEN << "Equal Test Passed!" << TERMINAL_COLOR_RESET << std::endl;
+    
+    if(VectorCompare(v,InitilizerToVector({1,2,3,3,5})))
+    {
+        std::cout << TERMINAL_COLOR_RED << GetBytes(&v[0],5) << " is not supposed to be equal to " << GetBytes(&InitilizerToVector({1,2,3,4,5})[0],5) << TERMINAL_COLOR_RESET << std::endl;
+        return false;
+    }
+    std::cout << TERMINAL_COLOR_GREEN << "Unequal Test Passed!" << TERMINAL_COLOR_RESET << std::endl;
+    return true;
+    
 }
 
 int main()
@@ -362,6 +409,12 @@ int main()
     {
         std::cout << TERMINAL_COLOR_RED << "arraycpy failed!" << TERMINAL_COLOR_RESET << std::endl;
         exit(0b10000000);
+    }
+    std::cout << TERMINAL_COLOR_YELLOW << "Running tests on initconvert" << TERMINAL_COLOR_RESET << std::endl;
+    if(!PerformTestInitList())
+    {
+        std::cout << TERMINAL_COLOR_RED << "initconvert failed!" << TERMINAL_COLOR_RESET << std::endl;
+        exit(0b10000001);
     }
     
     std::cout << TERMINAL_COLOR_GREEN << "Test Complete - No errors!" << TERMINAL_COLOR_RESET << std::endl;

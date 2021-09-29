@@ -29,3 +29,20 @@ inline static bool ArrayCompare(T* t1, size_t t1_len, T* t2, size_t t2_len)
     }
     return true;
 }
+
+template <typename T>
+inline static bool VectorCompare(std::vector<T> t1, std::vector<T> t2)
+{
+    if(t1.size() != t2.size())
+    {
+        return false;
+    }
+    for(size_t i = 0; i < t1.size();i++)
+    {
+        if(t1.at(i) != t2.at(i))
+        {
+            return false;
+        }
+    }
+    return true;
+}

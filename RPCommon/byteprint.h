@@ -67,6 +67,10 @@ inline std::string GetBytes(T* tArr, unsigned int arrLen)
             //res += (unsigned char)(*(tArr+u+(i*t_size)));
             res += "0x";
             res += GetHexFromTable((unsigned char)(*(tArr+u+(i*t_size))));
+            if(u != t_size-1)
+            {
+                res += " ";
+            }
         }
         if(i != full_arr_size-t_size)
         {
