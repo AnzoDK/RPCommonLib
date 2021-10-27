@@ -360,6 +360,21 @@ bool PerformTestInitList()
     
 }
 
+
+bool PerformTestArrayToVector()
+{
+    std::vector<int> vI = {0,1020,222,5838,4444,22222,3};
+    int* aI = new int[] {0,1020,222,5838,4444,22222,3};
+    std::cout << "Testing ArrayToVector..." << std::endl;
+    if(!VectorCompare(ArrayToVector(aI,7),vI))
+    {
+        std::cout << TERMINAL_COLOR_RED << GetBytes(&vI[0],7) << " is supposed to be equal to " << GetBytes(aI,7) << TERMINAL_COLOR_RESET << std::endl;
+        return false;
+    }
+    std::cout << TERMINAL_COLOR_GREEN << "ArrayToVector Test Passed!" << TERMINAL_COLOR_RESET << std::endl;
+    return true;
+}
+
 int main()
 {
     std::cout << TERMINAL_COLOR_YELLOW << "Running tests on Cstrcmp" << TERMINAL_COLOR_RESET << std::endl;
@@ -415,6 +430,12 @@ int main()
     {
         std::cout << TERMINAL_COLOR_RED << "initconvert failed!" << TERMINAL_COLOR_RESET << std::endl;
         exit(0b10000001);
+    }
+    std::cout << TERMINAL_COLOR_YELLOW << "Running tests on arraytovector" << TERMINAL_COLOR_RESET << std::endl;
+    if(!PerformTestArrayToVector())
+    {
+        std::cout << TERMINAL_COLOR_RED << "arraytovector failed!" << TERMINAL_COLOR_RESET << std::endl;
+        exit(0b10000010);
     }
     
     std::cout << TERMINAL_COLOR_GREEN << "Test Complete - No errors!" << TERMINAL_COLOR_RESET << std::endl;

@@ -16,3 +16,4 @@
 //#include "rpcommonerr.h"
 #include "eat.h"
 #include "unsignedfstream.h"
+#include "arraytovector.h"
