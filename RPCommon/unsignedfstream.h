@@ -1,9 +1,17 @@
 #pragma once
 #include <fstream>
 #include <iostream>
+//YES I LOVE C++17 :DDDDD
+#include <filesystem>
 
 inline unsigned char* ReadPartialUnsignedFile(std::string file, size_t& bytes) //reads 'bytes' bytes from file - Bytes will be updated to match the bytes read
 {
+    if(!std::filesystem::exists(file))
+    {
+        bytes = 0;
+        std::cout << "File read error" << std::endl;
+        return nullptr;
+    }
     unsigned char* buffer = new unsigned char[bytes];
     std::ifstream in = std::ifstream(file,std::ios::binary | std::ios::ate);
     size_t size = in.tellg();
@@ -31,6 +39,12 @@ inline unsigned char* ReadPartialUnsignedFile(std::string file, size_t& bytes) /
 }
 inline unsigned char* ReadUnsignedFile(std::string file, size_t& bytesRead) //Reads the whole file
 {
+    if(!std::filesystem::exists(file))
+    {
+        bytesRead = 0;
+         std::cout << "File read error" << std::endl;
+        return nullptr;
+    }
     unsigned char* buffer;
     std::ifstream in = std::ifstream(file,std::ios::binary | std::ios::ate);
     size_t size = in.tellg();
