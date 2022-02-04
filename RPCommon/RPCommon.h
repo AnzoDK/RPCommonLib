@@ -18,3 +18,4 @@
 #include "unsignedfstream.h"
 #include "arraytovector.h"
 #include "arraypush.h"
+#include "arrayappend.h"
