@@ -375,6 +375,32 @@ bool PerformTestArrayToVector()
     return true;
 }
 
+bool PerformTestPushArrayToVector()
+{
+    std::vector<int> vI = {};
+    int arr[] = {333,444,555,666};
+    std::vector<int> tV = ArrayToVector(arr,4);
+    std::cout << "Testing PushArrayToVector on empty vector..." << std::endl;
+    PushArrayToVector(vI, arr, 4);
+    if(!VectorCompare(tV,vI))
+    {
+        std::cout << TERMINAL_COLOR_RED << GetBytes(&vI[0],4) << " is supposed to be equal to " << GetBytes(&tV[0],4) << TERMINAL_COLOR_RESET << std::endl;
+        return false;
+    }
+    int arr2[] = {999,333333}; 
+    std::cout << "Testing PushArrayToVector on populated vector..." << std::endl;
+    tV.push_back(999);
+    tV.push_back(333333);
+    PushArrayToVector(vI, arr2, 2);
+    if(!VectorCompare(tV,vI))
+    {
+        std::cout << TERMINAL_COLOR_RED << GetBytes(&vI[0],4) << " is supposed to be equal to " << GetBytes(&tV[0],4) << TERMINAL_COLOR_RESET << std::endl;
+        return false;
+    }
+    std::cout << TERMINAL_COLOR_GREEN << "PushArrayToVector Test Passed!" << TERMINAL_COLOR_RESET << std::endl;
+    return true;
+}
+
 int main()
 {
     std::cout << TERMINAL_COLOR_YELLOW << "Running tests on Cstrcmp" << TERMINAL_COLOR_RESET << std::endl;
@@ -436,6 +462,12 @@ int main()
     {
         std::cout << TERMINAL_COLOR_RED << "arraytovector failed!" << TERMINAL_COLOR_RESET << std::endl;
         exit(0b10000010);
+    }
+    std::cout << TERMINAL_COLOR_YELLOW << "Running tests on arraypush" << TERMINAL_COLOR_RESET << std::endl;
+    if(!PerformTestPushArrayToVector())
+    {
+        std::cout << TERMINAL_COLOR_RED << "arraypush failed!" << TERMINAL_COLOR_RESET << std::endl;
+        exit(0b10000100);
     }
     
     std::cout << TERMINAL_COLOR_GREEN << "Test Complete - No errors!" << TERMINAL_COLOR_RESET << std::endl;
