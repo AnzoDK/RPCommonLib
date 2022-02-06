@@ -2,7 +2,7 @@
 pkgname="rpcommon"
 provides=('rpcommon')
 conflicts=('rpcommon-dev')
-pkgver=0.2.r74.9a372ba
+pkgver=0.2.r75.04a0a34
 MAJORVERSION=0.2
 pkgver()
 {
@@ -20,8 +20,14 @@ md5sums=('SKIP')
 prepare()
 {
     echo -e "#pragma once\n#define RPCOMMON_VERSION \"$pkgver\"" > RPCommonLib/RPCommon/version.h
-    LENGTH=$(expr length $pkgver)
-    echo -e "#define RPCOMMON_VERSION_NR $(expr $(printf "%d + " $(for i in {0..$LENGTH}; do echo "\'${pkgver:$i:1} "; done) && echo -e "0\n"))" >> RPCommonLib/RPCommon/version.h
+    #LENGTH=$(expr length ${pkgver})
+    #for((i=0; i<$LENGTH;i++)); do printf \'${pkgver:$i:1}; done
+    #printf "%d + " $(for((i=0; i<$LENGTH;i++)); do printf "\\'${pkgver:$i:1} "; done) && echo -e "0\n"
+    #NUMERIC=$(expr $(printf "%d + " $(for((i=0; i<$LENGTH;i++)); do printf "\\'${pkgver:$i:1} ";  done) && echo -e "0\n"))
+    LAST=$(cut -d "." -f3 <<< $pkgver);
+    NUMERIC=$(expr ${pkgver:0:1} \* 10 + ${pkgver:2:1} \* 5 + ${LAST:1})
+    
+    echo -e "#define RPCOMMON_VERSION_NR ${NUMERIC}" >> RPCommonLib/RPCommon/version.h
 }
 package()
 {
