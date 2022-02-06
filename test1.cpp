@@ -397,6 +397,16 @@ bool PerformTestPushArrayToVector()
         std::cout << TERMINAL_COLOR_RED << GetBytes(&vI[0],4) << " is supposed to be equal to " << GetBytes(&tV[0],4) << TERMINAL_COLOR_RESET << std::endl;
         return false;
     }
+    std::cout << "Testing PushArrayToVector on const char* array..." << std::endl;
+    const char* tS = "TestString";
+    std::vector<char> cV = std::vector<char>();
+    std::vector<char> cV2 = {'T', 'e', 's','t','S','t','r','i','n','g','\0'};
+    PushArrayToVector(cV,tS,11);
+    if(!VectorCompare(cV,cV2))
+    {
+        std::cout << TERMINAL_COLOR_RED << GetBytes(&cV[0],11) << " is supposed to be equal to " << GetBytes(&cV2[0],11) << TERMINAL_COLOR_RESET << std::endl;
+        return false;
+    }
     std::cout << TERMINAL_COLOR_GREEN << "PushArrayToVector Test Passed!" << TERMINAL_COLOR_RESET << std::endl;
     return true;
 }
