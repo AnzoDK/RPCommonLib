@@ -2,7 +2,7 @@
 pkgname="rpcommon"
 provides=('rpcommon')
 conflicts=('rpcommon-dev')
-pkgver=0.2.r70.2f9a6e1
+pkgver=0.2.r71.b07757f
 MAJORVERSION=0.2
 pkgver()
 {
@@ -17,6 +17,10 @@ makedepends=('git')
 source=("git+https://github.com/AnzoDK/RPCommonLib.git#branch=master")
 license=('BSD2')
 md5sums=('SKIP')
+prepare()
+{
+    echo -e "#pragma once\nRPCOMMON_VERSION $pkgver" > RPCommonLib/RPCommon/version.h 
+}
 package()
 {
    cd RPCommonLib
