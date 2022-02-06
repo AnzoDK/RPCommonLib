@@ -410,12 +410,13 @@ bool PerformTestArrayAppend()
     PushArrayToVector(vI,arr2,3);
     size_t newLen = 0;
     int* arr3 = AppendArray(arr1, 3, arr2, 3,newLen);
-    std::cout << "Testing AppendArray..." << std::endl;
+    std::cout << "Testing AppendArray on normal type..." << std::endl;
     if(!ArrayCompare(arr3,newLen,&vI[0],vI.size()))
     {
         std::cout << TERMINAL_COLOR_RED << GetBytes(&vI[0],vI.size()) << " is supposed to be equal to " << GetBytes(arr3,newLen) << TERMINAL_COLOR_RESET << std::endl;
         return false;
     }
+    delete[] arr3;
     std::cout << TERMINAL_COLOR_GREEN << "AppendArray Test Passed!" << TERMINAL_COLOR_RESET << std::endl;
     return true;
     
