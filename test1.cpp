@@ -434,6 +434,7 @@ bool PerformTestArrayAppend()
 
 int main()
 {
+    std::cout << TERMINAL_COLOR_BLUE << "Building version: " << RPCOMMON_VERSION << std::endl;
     std::cout << TERMINAL_COLOR_YELLOW << "Running tests on Cstrcmp" << TERMINAL_COLOR_RESET << std::endl;
     if(!PerformTestCstrcmp())
     {
@@ -507,6 +508,6 @@ int main()
         exit(0b10001000);
     }
     
-    std::cout << TERMINAL_COLOR_GREEN << "Test Complete - No errors!" << TERMINAL_COLOR_RESET << std::endl;
+    std::cout << TERMINAL_COLOR_GREEN << "Test Complete - No errors! (Build Ver: " << RPCOMMON_VERSION << ")" << TERMINAL_COLOR_RESET << std::endl;
     return 0;
 }
