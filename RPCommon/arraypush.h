@@ -15,6 +15,6 @@ static inline void PushArrayToVector(std::vector<T>& vec, const char* arr, size_
 {
     for(size_t i = 0; i < arrLen; i++)
     {
-        vec.push_back(arr[i]);
+        vec.push_back((T)arr[i]); //if possible
     }
 }
