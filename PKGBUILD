@@ -2,7 +2,7 @@
 pkgname="rpcommon"
 provides=('rpcommon')
 conflicts=('rpcommon-dev')
-pkgver=0.2.r72.00718d4
+pkgver=0.2.r73.0ff6995
 MAJORVERSION=0.2
 pkgver()
 {
@@ -19,7 +19,7 @@ license=('BSD2')
 md5sums=('SKIP')
 prepare()
 {
-    echo -e "#pragma once\nRPCOMMON_VERSION \"$pkgver\"" > RPCommonLib/RPCommon/version.h 
+    echo -e "#pragma once\n#define RPCOMMON_VERSION \"$pkgver\"" > RPCommonLib/RPCommon/version.h 
 }
 package()
 {
