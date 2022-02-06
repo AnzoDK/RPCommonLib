@@ -507,6 +507,6 @@ int main()
         std::cout << TERMINAL_COLOR_RED << "arrayappend failed!" << TERMINAL_COLOR_RESET << std::endl;
         exit(0b10001000);
     }
-    std::cout << TERMINAL_COLOR_GREEN << "Test Complete - No errors! (Build Ver: " << RPCOMMON_VERSION << ")" << TERMINAL_COLOR_RESET << std::endl;
+    std::cout << TERMINAL_COLOR_GREEN << "Test Complete - No errors! (Build Ver: " << RPCOMMON_VERSION << " || numeric: " << RPCOMMON_VERSION_NR << ")" << TERMINAL_COLOR_RESET << std::endl;
     return 0;
 }

@@ -2,7 +2,7 @@
 pkgname="rpcommon"
 provides=('rpcommon')
 conflicts=('rpcommon-dev')
-pkgver=0.2.r73.0ff6995
+pkgver=0.2.r74.9a372ba
 MAJORVERSION=0.2
 pkgver()
 {
@@ -19,7 +19,9 @@ license=('BSD2')
 md5sums=('SKIP')
 prepare()
 {
-    echo -e "#pragma once\n#define RPCOMMON_VERSION \"$pkgver\"" > RPCommonLib/RPCommon/version.h 
+    echo -e "#pragma once\n#define RPCOMMON_VERSION \"$pkgver\"" > RPCommonLib/RPCommon/version.h
+    LENGTH=$(expr length $pkgver)
+    echo -e "#define RPCOMMON_VERSION_NR $(expr $(printf "%d + " $(for i in {0..$LENGTH}; do echo "\'${pkgver:$i:1} "; done) && echo -e "0\n"))" >> RPCommonLib/RPCommon/version.h
 }
 package()
 {
