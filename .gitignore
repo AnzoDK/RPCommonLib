@@ -3,3 +3,4 @@ src/*
 pkg/*
 *.zst
 *.out
+testWrite.txt
