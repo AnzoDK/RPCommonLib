@@ -273,7 +273,7 @@ bool PerformTestFstream()
     std::cout << TERMINAL_COLOR_GREEN << "Passed!" << TERMINAL_COLOR_RESET << std::endl;
     
     std::cout << "Testing File Write..." << std::endl;
-    WriteUnsignedArray(expected,45,"testWrite.txt");
+    WriteUnsignedFile(expected,45,"testWrite.txt");
     input = ReadUnsignedFile("testWrite.txt",bytesRead);
     if(!Cstrcmp(reinterpret_cast<char*>(input),bytesRead,reinterpret_cast<char*>(expected),45,true))
     {

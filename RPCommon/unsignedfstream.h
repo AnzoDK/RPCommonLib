@@ -65,7 +65,7 @@ inline unsigned char* ReadUnsignedFile(std::string file, size_t& bytesRead) //Re
         return new unsigned char[1];
     }
 }
-inline static void WriteUnsignedVector(std::vector<unsigned char> v, std::string path)
+inline static void WriteUnsignedFile(std::vector<unsigned char> v, std::string path)
 {
     std::ofstream out = std::ofstream(path, std::ios::binary | std::ios::out);
     for(long unsigned int i = 0; i < v.size(); i++)
@@ -74,7 +74,7 @@ inline static void WriteUnsignedVector(std::vector<unsigned char> v, std::string
     }
     out.close();
 }
-inline static void WriteUnsignedArray(unsigned char* arr, long unsigned int length, std::string path)
+inline static void WriteUnsignedFile(unsigned char* arr, long unsigned int length, std::string path)
 {
     std::ofstream out = std::ofstream(path, std::ios::binary | std::ios::out);
     for(long unsigned int i = 0; i < length; i++)
