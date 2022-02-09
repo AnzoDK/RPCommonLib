@@ -269,9 +269,19 @@ bool PerformTestFstream()
         std::cout << TERMINAL_COLOR_RED << GetBytes(expected,bytesRead) << " is not supposed to be equal to " << GetBytes(input,45) << TERMINAL_COLOR_RESET << std::endl;
         return false;
     }
-    
+    delete[] input;
     std::cout << TERMINAL_COLOR_GREEN << "Passed!" << TERMINAL_COLOR_RESET << std::endl;
     
+    std::cout << "Testing File Write..." << std::endl;
+    WriteUnsignedArray(expected,45,"testWrite.txt");
+    input = ReadUnsignedFile("testWrite.txt",bytesRead);
+    if(!Cstrcmp(reinterpret_cast<char*>(input),bytesRead,reinterpret_cast<char*>(expected),45,true))
+    {
+         std::cout << TERMINAL_COLOR_RED << GetBytes(expected,45) << " is supposed to be equal to " << GetBytes(input,bytesRead) << TERMINAL_COLOR_RESET << std::endl;
+        return false;
+    }
+    delete[] input;
+    std::cout << TERMINAL_COLOR_GREEN << "Passed!" << TERMINAL_COLOR_RESET << std::endl;
     return true;
     
 }
@@ -319,7 +329,7 @@ bool PerformTestInitList()
 {
     int arr[] = {1,2,3,4,5};
     size_t size = 0;
-    std::cout << "Testing InitToÁrray..." << std::endl;
+    std::cout << "Testing InitToArray..." << std::endl;
     int* arr2 = InitilizerToArray({1,2,3,4,5},size);
     if(!ArrayCompare(arr,5,arr2,size))
     {
