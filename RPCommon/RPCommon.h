@@ -1,6 +1,6 @@
 #pragma once
 #include "version.h"
-#if defined(WIN32) || defined(WIN64)
+#if defined(_WIN32) || defined(_WIN64)
 #include <string>
 #endif
 #include "strreverse.h"
