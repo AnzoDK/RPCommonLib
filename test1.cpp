@@ -282,6 +282,23 @@ bool PerformTestFstream()
     }
     delete[] input;
     std::cout << TERMINAL_COLOR_GREEN << "Passed!" << TERMINAL_COLOR_RESET << std::endl;
+    
+    std::cout << "Testing File Read/Write with unicode name..." << std::endl;
+#ifdef _WIN32
+    WriteUnsignedFile(expected,45,L"テスト.txt");
+    input = ReadUnsignedFile(L"テスト.txt",bytesRead);
+#else
+    WriteUnsignedFile(expected,45,"テスト.txt");
+    input = ReadUnsignedFile("テスト.txt",bytesRead);
+#endif
+    if(!Cstrcmp(reinterpret_cast<char*>(input),bytesRead,reinterpret_cast<char*>(expected),45,true))
+    {
+         std::cout << TERMINAL_COLOR_RED << GetBytes(expected,45) << " is supposed to be equal to " << GetBytes(input,bytesRead) << TERMINAL_COLOR_RESET << std::endl;
+        return false;
+    }
+    delete[] input;
+    
+    std::cout << TERMINAL_COLOR_GREEN << "Passed!" << TERMINAL_COLOR_RESET << std::endl;
     return true;
     
 }
