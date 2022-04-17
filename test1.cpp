@@ -1,5 +1,5 @@
 #include <iostream>
-#include "RPCommon/RPCommon.h"
+#include "RPCommon/RPCommonExtended.h"
 
 bool b_working = true;
 bool PerformTestCstrcmp()
@@ -458,6 +458,43 @@ bool PerformTestArrayAppend()
     return true;
     
 }
+bool PerformTestPVector()
+{
+    PVector<DualEntry<int>> vector = PVector<DualEntry<int>>();
+    PVector<TriEntry<int>> vector3 = PVector<TriEntry<int>>();
+    vector.Add(DualEntry<int>(1,2));
+    vector.Add(1,5);
+    vector.Add(DualEntry<int>(3,4));
+    vector3.Add(TriEntry<int>(3,4,3));
+    vector3.Add(5555,3323,198273);
+    if(vector.GetAt(1).x() != 1)
+    {
+        std::cout << TERMINAL_COLOR_RED << vector.GetAt(1).x() << " is supposed to be equal to " << 1 << TERMINAL_COLOR_RESET << std::endl;
+        return false;
+    }
+    if(vector3[1].z() != 198273)
+    {
+        std::cout << TERMINAL_COLOR_RED << vector3.GetAt(1).z() << " is supposed to be equal to " << 198273 << TERMINAL_COLOR_RESET << std::endl;
+        return false;
+    }
+    vector.RemoveAt(0);
+    bool err = 0;
+    try{
+        vector3.RemoveAt(2);
+    }
+    catch(std::out_of_range e)
+    {
+        err = 1;
+    }
+    
+    if(!err)
+    {
+        std::cout << TERMINAL_COLOR_RED << "vector3.RemoveAt(2);" << " Was supposed to throw " << "std::out_of_range" << " But didn't" << TERMINAL_COLOR_RESET << std::endl;
+        return false;
+    }
+    std::cout << TERMINAL_COLOR_GREEN << "PVector Test Passed!" << TERMINAL_COLOR_RESET << std::endl;
+    return true;
+}
 
 int main()
 {
@@ -533,6 +570,11 @@ int main()
     {
         std::cout << TERMINAL_COLOR_RED << "arrayappend failed!" << TERMINAL_COLOR_RESET << std::endl;
         exit(0b10001000);
+    }
+    if(!PerformTestPVector())
+    {
+        std::cout << TERMINAL_COLOR_RED << "arrayappend failed!" << TERMINAL_COLOR_RESET << std::endl;
+        exit(0b10010000);
     }
     std::cout << TERMINAL_COLOR_GREEN << "Test Complete - No errors! (Build Ver: " << RPCOMMON_VERSION << " || numeric: " << RPCOMMON_VERSION_NR << ")" << TERMINAL_COLOR_RESET << std::endl;
     return 0;
