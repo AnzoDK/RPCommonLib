@@ -98,6 +98,7 @@ bool PerformTestCstrcmp()
         std::cout << TERMINAL_COLOR_RED << " String to byte FAILED TO CONVERT" << TERMINAL_COLOR_RESET << std::endl;
         return false;
     }
+    std::cout << TERMINAL_COLOR_GREEN << "Passed!" << TERMINAL_COLOR_RESET << std::endl;
     hexText+='0';
     std::cout << "Comparing " << TERMINAL_COLOR_BLUE << hexText << TERMINAL_COLOR_RESET << " to " << TERMINAL_COLOR_BLUE << hexByte << TERMINAL_COLOR_RESET << std::endl;
     if(GetByteFromTable(hexText) != (unsigned char)-1)
