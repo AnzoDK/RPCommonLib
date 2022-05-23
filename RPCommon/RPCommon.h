@@ -20,3 +20,4 @@
 #include "arraytovector.h"
 #include "arraypush.h"
 #include "arrayappend.h"
+#include "strcasing.h"
