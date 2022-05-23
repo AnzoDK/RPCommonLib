@@ -496,6 +496,27 @@ bool PerformTestPVector()
     return true;
 }
 
+bool PerformTestStringCasing()
+{
+    std::string lowerCase = "hello world!";
+    std::string upperCase = "HELLO WORLD!";
+    
+    if(ToLowerCase(upperCase) != lowerCase)
+    {
+        std::cout << TERMINAL_COLOR_RED << "ToLowerCase FAILED: " << ToLowerCase(upperCase) << " is supposed to be equal to " << lowerCase << TERMINAL_COLOR_RESET << std::endl;
+        return false;
+    }
+    
+    if(ToUpperCase(lowerCase) != upperCase)
+    {
+        std::cout << TERMINAL_COLOR_RED << "ToUpperCase FAILED: " << ToUpperCase(lowerCase) << " is supposed to be equal to " << upperCase << TERMINAL_COLOR_RESET << std::endl;
+        return false;
+    }
+    
+    std::cout << TERMINAL_COLOR_GREEN << "String Casing Test Passed!" << TERMINAL_COLOR_RESET << std::endl;
+    return true;
+}
+
 int main()
 {
     std::cout << TERMINAL_COLOR_BLUE << "Building version: " << RPCOMMON_VERSION << std::endl;
@@ -575,6 +596,11 @@ int main()
     {
         std::cout << TERMINAL_COLOR_RED << "arrayappend failed!" << TERMINAL_COLOR_RESET << std::endl;
         exit(0b10010000);
+    }
+    if(!PerformTestStringCasing())
+    {
+        std::cout << TERMINAL_COLOR_RED << "strcasing failed!" << TERMINAL_COLOR_RESET << std::endl;
+        exit(0b10100000);
     }
     std::cout << TERMINAL_COLOR_GREEN << "Test Complete - No errors! (Build Ver: " << RPCOMMON_VERSION << " || numeric: " << RPCOMMON_VERSION_NR << ")" << TERMINAL_COLOR_RESET << std::endl;
     return 0;
