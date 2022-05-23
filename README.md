@@ -6,7 +6,7 @@ A compilation of small and common functions, divided into seperate headers to ma
 Just include `RPCommon.h` or one (or more) of the headers to get either all functions or just the ones you need :)
 
 
-**NOTE** If installed through the [PKGBUILD](https://github.com/AnzoDK/RPCommonLib/blob/master/PKGBUILD) the include command for `RPCommon` will be `#include <RPCommon/RPCommon.h>` or in case of a single header `<RPCommon/<header_name_here>`
+**NOTE** If installed through the [PKGBUILD](https://github.com/AnzoDK/RPCommonLib/blob/master/PKGBUILD) the include command for `RPCommon` will be `#include <RPCommon/RPCommon.h>` or in case of a single header `#include <RPCommon/<header_name_here>`
 
 #### Example:
 
