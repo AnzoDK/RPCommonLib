@@ -99,6 +99,7 @@ bool PerformTestCstrcmp()
         return false;
     }
     hexText+='0';
+    std::cout << "Comparing " << TERMINAL_COLOR_BLUE << hexText << TERMINAL_COLOR_RESET << " to " << TERMINAL_COLOR_BLUE << hexByte << TERMINAL_COLOR_RESET << std::endl;
     if(GetByteFromTable(hexText) != (unsigned char)-1)
     {
         std::cout << TERMINAL_COLOR_RED << " String to byte FAILED TO DETECT ERRORS" << TERMINAL_COLOR_RESET << std::endl;
