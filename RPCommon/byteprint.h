@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
-inline char __HexTable(unsigned char c)
+static char __HexTable(unsigned char c)
 {
     switch(c)
     {
@@ -36,7 +36,49 @@ inline char __HexTable(unsigned char c)
     }
 }
 
-inline std::string GetHexFromTable(unsigned char b)
+static char __ReverseHexTable(unsigned char c)
+{
+    switch(c)
+    {
+        case '0':
+            return 0;
+        case '1':
+			return 1;
+		case '2':
+			return 2;
+		case '3':
+			return 3;
+		case '4':
+			return 4;
+		case '5':
+			return 5;
+		case '6':
+			return 6;
+		case '7':
+			return 7;
+		case '8':
+			return 8;
+		case '9':
+			return 9;
+		case 'A':
+			return 10;
+		case 'B':
+			return 11;
+		case 'C':
+			return 12;
+		case 'D':
+			return 13;
+		case 'E':
+			return 14;
+		case 'F':
+			return 15;
+		default:
+			std::cout << "Unknown hex char " << c << std::endl;
+			return -1;
+	}
+}
+
+static std::string GetHexFromTable(unsigned char b)
 {
     std::string res = "";
     unsigned char tmp = b;
@@ -48,14 +90,48 @@ inline std::string GetHexFromTable(unsigned char b)
     
 }
 
-inline void PrintBytes()
+#if __cplusplus > 201703L
+/*C++20*/
+static unsigned char GetByteFromTable(std::string_view byteStr)
+{
+    unsigned char byte = 0x0;
+    if(byteStr.size() != 2)
+    {
+        std::cout << "Input string: " << byteStr << " Is not a valid 1 byte string" << std::endl;
+        return -1;
+    }
+    byte = byte | __ReverseHexTable(byteStr.at(0)) << 4;
+    byte = byte | __ReverseHexTable(byteStr.at(1));
+    return byte;
+    
+}
+#else
+// C++ < C++20
+
+static unsigned char GetByteFromTable(const std::string& byteStr)
+{
+    unsigned char byte = 0x0;
+    if(byteStr.size() != 2)
+    {
+        std::cout << "Input string: " << byteStr << " Is not a valid 1 byte string" << std::endl;
+        return -1;
+    }
+    byte = byte | __ReverseHexTable(byteStr.at(0)) << 4;
+    byte = byte | __ReverseHexTable(byteStr.at(1));
+    return byte;
+    
+}
+#endif
+
+
+static void PrintBytes()
 {
     
 }
 
 
 template <typename T>
-inline std::string GetBytes(T* tArr, unsigned int arrLen)
+static std::string GetBytes(T* tArr, unsigned int arrLen)
 {
     std::string res = "";
     unsigned int t_size = sizeof(T);
@@ -83,7 +159,7 @@ inline std::string GetBytes(T* tArr, unsigned int arrLen)
 //Vectors made me do this..... Blame them, not me XD
 //Get Object at memaddress and print it's hex values
 template <typename T>
-inline std::string GetBytes(size_t address, unsigned int arrLen, bool showObjs=false)
+static std::string GetBytes(size_t address, unsigned int arrLen, bool showObjs=false)
 {
     std::string res = "";
     unsigned int t_size = sizeof(T);
