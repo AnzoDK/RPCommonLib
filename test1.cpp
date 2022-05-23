@@ -89,8 +89,8 @@ bool PerformTestCstrcmp()
     std::cout << TERMINAL_COLOR_GREEN << "Passed!" << TERMINAL_COLOR_RESET << std::endl;
     
     std::cout << "Testing ReverseHexTable..." << std::endl;
-    std::string hexText = "60";
-    unsigned char hexByte = 0x60;
+    std::string hexText = "61";
+    unsigned char hexByte = 0x61;
     std::cout << "Comparing " << TERMINAL_COLOR_BLUE << hexText << TERMINAL_COLOR_RESET << " to " << TERMINAL_COLOR_BLUE << hexByte << TERMINAL_COLOR_RESET << std::endl;
     
     if(GetByteFromTable(hexText) != hexByte)
