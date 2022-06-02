@@ -1,5 +1,8 @@
+.vscode/**
 RPCommonLib/*
 src/*
 pkg/*
 *.zst
 *.out
+testWrite.txt
+テスト.txt

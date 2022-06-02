@@ -1,6 +1,6 @@
-#include <iostream>
 #pragma once
-static std::string ReverseString(std::string s)
+#include <iostream>
+inline static std::string ReverseString(std::string s)
 {
     std::string tmp = "";
     size_t len = s.length();

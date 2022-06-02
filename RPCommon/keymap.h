@@ -4,14 +4,19 @@
 template <typename T>
 struct Key
 {
-    Key(){keyName = ""; keyValue = nullptr;};
+    Key(){keyName = "";};
     //Don't use this - This is meant to be used to create empty keys for errors
-    Key(std::string name){ keyName = name, keyValue = nullptr;};
+    Key(std::string name){ keyName = name;};
     
+    //Key(std::string name, T val){keyName = name; keyValue = &val;};
     Key(std::string name, T val){keyName = name; keyValue = val;};
+    
+    Key(std::string name, T* val){keyName = name; keyValue = *val;}
+    
     ~Key(){}
     std::string keyName;
     T keyValue;
+    //T _backupKey;
     
 };
 

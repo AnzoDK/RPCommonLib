@@ -1,19 +1,40 @@
 # RPCommonLib
-A compilation of small and common functions to make the dev life easier
+A compilation of small and common functions, divided into seperate headers to make the dev life easier.
 
-List of Functions included:
+## Usage
 
-### std::string ReverseString(std::string)
-Takes a string and reverses it, without deleting the input string, and returns the reversed string
+Just include `RPCommon.h` or one (or more) of the headers to get either all functions or just the ones you need :)
 
-### size_t StringFindLast(char, std::string)
-Finds the last instance of a given char in a given string, and returns the position
 
-### size_t StringFindLast(std::string, std::string)
-Finds the last instance of a given string in a given string, and returns the position
+**NOTE** If installed through the [PKGBUILD](https://github.com/AnzoDK/RPCommonLib/blob/master/PKGBUILD) the include command for `RPCommon` will be `#include <RPCommon/RPCommon.h>` or in case of a single header `#include <RPCommon/<header_name_here>`
 
-### bool Cstrcmp(const char*, const char*)
-Compares two null-terminated C-strings without including \<stdio> or \<string>
+#### Example:
 
-### bool Cstrcmp(const char*, uint64_t, const char*, uint64_t, bool=false)
-Compares two NON-nullterminated C-strings without including \<stdio> or \<string> and allows for comparing bytes (with null bytes using the bool arg)
+```c++
+#include "RPCommon.h"
+
+
+int main()
+{
+  std::string revThis = "sihTver";
+  std::cout << ReverseString(revThis) << std::endl;
+  return 0;
+}
+```
+or in this case, where only `ReverseString()` is needed, you could also just do:
+
+```c++
+#include "strreverse.h"
+
+
+int main()
+{
+  std::string revThis = "sihTver";
+  std::cout << ReverseString(revThis) << std::endl;
+  return 0;
+}
+```
+ 
+## Documentation
+
+List of Functions included + Documentation can be found [here](https://github.com/AnzoDK/RPCommonLib/blob/master/Doc.md)
