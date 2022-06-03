@@ -1,6 +1,8 @@
 CXX:=g++
 CXX_FLAGS:= -std=c++20
 DEBUG:= -g3
+X_LINK:= -lX11
+WAYLAND_LINK:=
 default:
 	make test
 	make ex_test
