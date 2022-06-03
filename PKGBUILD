@@ -2,19 +2,19 @@
 pkgname="rpcommon-dev"
 provides=('rpcommon')
 conflicts=('rpcommon')
-pkgver=0.0.10-dev
+pkgver=0.2.r103.08a4922
 MAJORVERSION=0.2
 pkgver()
 {
   cd RPCommonLib
-  printf "$MAJORVERSION.r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)-dev"
+  printf "$MAJORVERSION.r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 pkgrel=1
 arch=('any')
 pkgdesc="A compilation of small and common functions to make the dev life easier"
 url="https://github.com/AnzoDK/RPCommonLib"
 makedepends=('git')
-source=("git+https://github.com/AnzoDK/RPCommonLib.git#branch=master")
+source=("git+https://github.com/AnzoDK/RPCommonLib.git#branch=dev")
 license=('BSD2')
 md5sums=('SKIP')
 prepare()
