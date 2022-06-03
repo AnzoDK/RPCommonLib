@@ -2,7 +2,7 @@
 pkgname="rpcommon-dev"
 provides=('rpcommon')
 conflicts=('rpcommon')
-pkgver=0.2.r108.36455af
+pkgver=0.2.r109.2510c2b
 MAJORVERSION=0.2
 pkgver()
 {

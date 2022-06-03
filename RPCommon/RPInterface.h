@@ -17,9 +17,12 @@ class RPInterfaceException : public std::exception
 {
 protected:
     std::string m_msg = "";
+    uint error_code = -1;
 public:
-    RPInterfaceException(std::string_view e)
+    enum Error {NOT_IMPLEMENTED, XError};
+    RPInterfaceException(std::string_view e, Error eN)
     {
+        error_code = static_cast<int>(eN);
         m_msg = std::string(e);
     }
     virtual char const * what() const noexcept override
@@ -27,6 +30,11 @@ public:
         return m_msg.c_str(); 
         
     }
+    uint code()
+    {
+        return error_code;
+    }
+    
 
 };
 
