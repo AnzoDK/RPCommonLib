@@ -9,7 +9,6 @@ pkgver()
   cd RPCommonLib
   printf "$MAJORVERSION.r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)-dev"
 }
->>>>>>> master
 pkgrel=1
 arch=('any')
 pkgdesc="A compilation of small and common functions to make the dev life easier"
