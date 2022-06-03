@@ -9,4 +9,4 @@ default:
 test:
 	${CXX} ${CXX_FLAGS} ${DEBUG} test1.cpp -o test.out
 ex_test:
-	${CXX} ${CXX_FLAGS} ${DEBUG} test_experimental.cpp -o test_ex.out
+	${CXX} ${CXX_FLAGS} ${DEBUG} test_experimental.cpp -o test_ex.out $(X_LINK) $(WAYLAND_LINK)
