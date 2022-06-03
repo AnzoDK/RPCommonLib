@@ -2,7 +2,7 @@
 pkgname="rpcommon-dev"
 provides=('rpcommon')
 conflicts=('rpcommon')
-pkgver=0.2.r103.08a4922
+pkgver=0.2.r106.df57d0b
 MAJORVERSION=0.2
 pkgver()
 {
@@ -30,6 +30,12 @@ package()
    cd RPCommonLib
    make
    ./test.out
+   if [ $? -ne 0 ]
+   then
+   	echo "Tests Failed!! - Dying!"
+   	exit 1
+   fi
+    ./test_ex.out
    if [ $? -ne 0 ]
    then
    	echo "Tests Failed!! - Dying!"

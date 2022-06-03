@@ -1,4 +1,9 @@
 #pragma once
+
+//Not that we support windows at this moment...
+#if defined(_win32) || defined(_win64)
+    typedef unsigned int uint;
+#endif
 #include <iostream>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
@@ -35,6 +40,7 @@ struct WindowOptions
     XID window = -1;
     std::map<std::string,unsigned long> colorMap = std::map<std::string, unsigned long>();
     std::string title, minimizedTitle = "Default Window";
+    uint borderWidth = 5;
     
     WindowOptions(double x, double y, std::string_view _title)
     {
@@ -60,6 +66,15 @@ void DestroyWindow(WindowOptions& opt)
     XFreeGC(opt.display, opt.context);
     XDestroyWindow(opt.display,opt.window);
     XCloseDisplay(opt.display);
+}
+
+int __DefaultErrorHandler(Display* d, XErrorEvent * e)
+{
+    size_t errSize = 256;
+    char* errT = new char[errSize];
+    XGetErrorText(d, e->error_code,errT,errSize);
+    std::string err = "XError: " + std::string(errT);
+    throw new RPInterfaceException(err);
 }
 
 XID CreateWindow(WindowOptions& opt, XHandler handler, bool force=false)
@@ -95,15 +110,15 @@ XID CreateWindow(WindowOptions& opt, XHandler handler, bool force=false)
         opt.colorMap["Black"] = BlackPixel(opt.display,opt.screen);
         opt.colorMap["White"] = WhitePixel(opt.display,opt.screen);
         
-        //No clue what "5" does here...
+        XSetErrorHandler(*__DefaultErrorHandler);
         
-        XID window = XCreateSimpleWindow(opt.display,DefaultRootWindow(opt.display),opt.currX,opt.currY,opt.currW,opt.currH,5,opt.colorMap["White"],opt.colorMap["Black"]);
+        XID window = XCreateSimpleWindow(opt.display,DefaultRootWindow(opt.display),opt.currX,opt.currY,opt.currW,opt.currH,opt.borderWidth,opt.colorMap["White"],opt.colorMap["Black"]);
+        opt.window = window;
         
         XSetStandardProperties(opt.display,window,opt.title.c_str(),opt.minimizedTitle.c_str(),None,NULL,0,NULL);
+        return window;
         
-        
-        
-        
+
         
     }
     else
@@ -111,5 +126,10 @@ XID CreateWindow(WindowOptions& opt, XHandler handler, bool force=false)
         throw new RPInterfaceException("Wayland is not implemented yet...");
     }
     return -1;
+}
+
+void ShowWindow(WindowOptions& opt)
+{
+    XMapWindow(opt.display,opt.window);
 }
 
