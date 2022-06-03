@@ -122,7 +122,7 @@ XID CreateWindow(WindowOptions& opt, XHandler handler, bool force=false)
         
         XID window = XCreateSimpleWindow(opt.display,DefaultRootWindow(opt.display),opt.currX,opt.currY,opt.currW,opt.currH,opt.borderWidth,opt.colorMap["White"],opt.colorMap["Black"]);
         opt.window = window;
-        
+        XSelectInput(opt.display, opt.window, ExposureMask | KeyPressMask);
         XSetStandardProperties(opt.display,window,opt.title.c_str(),opt.minimizedTitle.c_str(),None,NULL,0,NULL);
         return window;
         

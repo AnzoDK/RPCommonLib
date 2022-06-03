@@ -15,11 +15,13 @@ bool PerformTestInterface()
         return 0;
     }
     
-    std::cout << "TERMINAL_COLOR_GREEN" << "Window Creation Sucess" << TERMINAL_COLOR_RESET << std::endl;
+    std::cout << TERMINAL_COLOR_GREEN << "Window Creation Sucess" << TERMINAL_COLOR_RESET << std::endl;
     
     std::cout << TERMINAL_COLOR_YELLOW << "Attempting Mapping..." << TERMINAL_COLOR_RESET << std::endl;
     
     ShowWindow(opt);
+    
+    DestroyWindow(opt);
     
     std::cout << TERMINAL_COLOR_GREEN << "RPInterface test succeeded" << TERMINAL_COLOR_RESET << std::endl;
     return 1;
