@@ -19,7 +19,7 @@ protected:
     std::string m_msg = "";
     uint error_code = -1;
 public:
-    enum Error {NOT_IMPLEMENTED, XError};
+    enum Error {NOT_IMPLEMENTED, XERROR};
     RPInterfaceException(std::string_view e, Error eN)
     {
         error_code = static_cast<int>(eN);
@@ -82,7 +82,7 @@ int __DefaultErrorHandler(Display* d, XErrorEvent * e)
     char* errT = new char[errSize];
     XGetErrorText(d, e->error_code,errT,errSize);
     std::string err = "XError: " + std::string(errT);
-    throw new RPInterfaceException(err);
+    throw new RPInterfaceException(err, RPInterfaceException::XERROR);
 }
 
 XID CreateWindow(WindowOptions& opt, XHandler handler, bool force=false)
@@ -131,7 +131,7 @@ XID CreateWindow(WindowOptions& opt, XHandler handler, bool force=false)
     }
     else
     {
-        throw new RPInterfaceException("Wayland is not implemented yet...");
+        throw new RPInterfaceException("Wayland is not implemented yet...",RPInterfaceException::NOT_IMPLEMENTED);
     }
     return -1;
 }

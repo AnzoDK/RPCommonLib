@@ -1,4 +1,3 @@
-#pragma once
 #include "RPCommon/RPInterface.h"
 #include "RPCommon/terminalcolor.h"
 
