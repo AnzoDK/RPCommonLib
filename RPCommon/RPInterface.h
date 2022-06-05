@@ -46,9 +46,12 @@ struct WindowOptions
     Display* display = nullptr;
     int screen = -1;
     XID window = -1;
+    std::string displayString = ""; //Set this to change what display will attempted to be opened
     std::map<std::string,unsigned long> colorMap = std::map<std::string, unsigned long>();
     std::string title, minimizedTitle = "Default Window";
     uint borderWidth = 5;
+    
+    
     
     WindowOptions(double x, double y, std::string_view _title)
     {
@@ -71,9 +74,34 @@ enum XHandler {Xlib, Wayland};
 
 void DestroyWindow(WindowOptions& opt)
 {
-    XFreeGC(opt.display, opt.context);
+    //XFreeGC(opt.display, opt.context); //GC's created by XDefaultGC must never be freed
+    XUnmapWindow(opt.display, opt.window);
+    XFlush(opt.display);
     XDestroyWindow(opt.display,opt.window);
     XCloseDisplay(opt.display);
+}
+
+void __DefaultTestHandle(WindowOptions& opt)
+{
+    XEvent event;
+    bool end = false;
+    while(true)
+    {
+        XNextEvent(opt.display,&event);
+        switch(event.type)
+        {
+            case MapNotify:
+                std::cout << "Window Mapped" << std::endl;
+                sleep(1);
+                end = 1;
+                break;
+        }
+        if(end)
+        {
+            break;
+        }
+
+    }
 }
 
 int __DefaultErrorHandler(Display* d, XErrorEvent * e)
@@ -107,7 +135,19 @@ XID CreateWindow(WindowOptions& opt, XHandler handler, bool force=false)
         }
         if(opt.display == nullptr)
         {
-            opt.display = XOpenDisplay((char*)0);
+            if(opt.displayString == "")
+            {
+                opt.display = XOpenDisplay(NULL);
+            }
+            else
+            {
+                opt.display = XOpenDisplay(opt.displayString.c_str());
+            }
+            if(opt.display == NULL)
+            {
+                
+                throw new RPInterfaceException(std::string("Failed To Open Display") + opt.displayString,RPInterfaceException::XERROR);
+            }
         }
         if(opt.screen == -1)
         {
@@ -122,8 +162,9 @@ XID CreateWindow(WindowOptions& opt, XHandler handler, bool force=false)
         
         XID window = XCreateSimpleWindow(opt.display,DefaultRootWindow(opt.display),opt.currX,opt.currY,opt.currW,opt.currH,opt.borderWidth,opt.colorMap["White"],opt.colorMap["Black"]);
         opt.window = window;
-        XSelectInput(opt.display, opt.window, ExposureMask | KeyPressMask);
+        XSelectInput(opt.display, opt.window, ExposureMask | StructureNotifyMask | FocusChangeMask | KeyPressMask);
         XSetStandardProperties(opt.display,window,opt.title.c_str(),opt.minimizedTitle.c_str(),None,NULL,0,NULL);
+        XFlush(opt.display);
         return window;
         
 
@@ -138,6 +179,7 @@ XID CreateWindow(WindowOptions& opt, XHandler handler, bool force=false)
 
 void ShowWindow(WindowOptions& opt)
 {
-    XMapWindow(opt.display,opt.window);
+    //XMapWindow(opt.display,opt.window);
+    XMapRaised(opt.display,opt.window);
 }
 
